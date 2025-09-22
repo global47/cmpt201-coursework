@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  int pid = getpid();
+  int parentPID = getppid();
+
+  printf("parent: %d\n", parentPID);
+  printf("start: %d\n", pid);
+
+  fork();
+
+  pid = getpid();
+  parentPID = getppid();
+
+  if (pid = getpid()) {
+    printf("child: %d, parent: %d\n", pid, parentPID);
+  } else {
+    printf("parent: %d, child %d\n", parentPID, pid);
+  }
+
+  return 0;
+}

@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  int pid = getpid();
+  int ppid = getppid();
+
+  printf("start: %d, child: %d\n", ppid, pid);
+
+  fork();
+
+  int ppid2 = getppid();
+  int pid2 = getpid();
+}

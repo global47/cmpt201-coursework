@@ -1,0 +1,10 @@
+int ()
+{
+  int var = 1;
+
+  while (var == 1)
+  {
+    printf("sleep");
+    sleep(5);
+  }
+}

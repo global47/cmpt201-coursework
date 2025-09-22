@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+  char *buffer;
+  size_t len = 32;
+  size_t characters;
+
+  printf("Enter programs to run: ");
+  characters = getline(&buffer, &len, stdin);
+
+  pid_t pid = fork();
+
+  if (pid == 0)
+  // child
+  {
+    execl(buffer, buffer, "~/", NULL);
+  }
+  return 0;
+}

@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  int pid = getpid();
+  int parentPID = getppid();
+
+  printf("parent: %d\n", parentPID);
+  printf("child: %d\n", pid);
+
+  fork();
+
+  pid = getpid();
+  parentPID = getppid();
+
+  printf("parent: %d\n", parentPID);
+  printf("child: %d\n", pid);
+
+  return 0;
+}

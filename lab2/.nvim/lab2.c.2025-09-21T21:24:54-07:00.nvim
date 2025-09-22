@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main() {
+  char *buffer;
+  size_t len = 32;
+  size_t characters;
+
+  while (1) {
+    printf("Enter programs to run: ");
+    characters = getline(&buffer, &len, stdin);
+
+    char *ptr = strtok_r(buffer, "\n", &buffer);
+
+    pid_t pid = fork();
+
+    if (pid == 0)
+    // child
+    {
+      execl(ptr,ptr, "/home", NULL);
+    } else {
+      int status;
+      waitpid(pid, &status, 0);
+    }
+  }
+  return 0;
+}

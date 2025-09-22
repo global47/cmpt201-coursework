@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() {
+  int pid = getpid();
+  int ppid = getppid();
+
+  // printf("start: %d, child: %d\n", ppid, pid);
+
+  pid_t pids = fork();
+
+  if (pids == 0) {
+    printf("child\n");
+    execl("/bin/ls", "/bin/ls", "/home", "-a", "-l", "-h", NULL);
+  } else {
+    printf("parent\n");
+    execl("/bin/ls", "/bin/ls", "/home", "-a", NULL);
+  }
+}

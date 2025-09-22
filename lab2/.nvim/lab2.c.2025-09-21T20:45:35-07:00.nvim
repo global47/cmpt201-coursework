@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+
+int main()
+{
+  char *buffer;
+  size_t len = 32;
+  size_t characters;
+
+
+  printf("Enter programs to run: ");
+  characters = getline(&buffer, &len, stdin);
+
+  return 0;
+}

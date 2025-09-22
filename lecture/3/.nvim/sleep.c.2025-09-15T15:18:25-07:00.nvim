@@ -1,0 +1,14 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+
+  while (true) {
+    printf("sleep\n");
+    sleep(5);
+  }
+
+  fork();
+  return 0;
+}
