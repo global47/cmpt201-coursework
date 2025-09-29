@@ -1,0 +1,65 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define MAX_SIZE 5
+
+typedef struct {
+  char **values;
+  int head, tail, size, num_entries;
+} queue;
+
+void init_queue(queue *q) {
+  q->size = MAX_SIZE;
+  q->values = malloc(sizeof(char *) * q->size);
+  q->head = 0;
+  q->tail = 0;
+  q->num_entries = 0;
+}
+
+bool queue_empty(queue *q) { return (q->num_entries == 0); }
+
+bool queue_full(queue *q) { return (q->num_entries == q->size); }
+
+void destory(queue *q) { free(q->values); }
+
+char *dequeue(queue *q) {
+  if (queue_empty(q)) {
+    return NULL; 
+  }
+
+  char *result;
+
+  result = q->values[q->head];
+  q->head = (q->head + 1) % q->size;
+  q->num_entries--;
+
+  return result;
+}
+
+void enqueue(queue *q, const char *value) {
+  if (queue_full(q)) {
+    dequeue(q);
+  }
+  q->values[q->tail] = value;
+  q->num_entries = (q->tail + 1) % q->size;
+}
+
+int main() {
+  queue q1;
+  char buf[32];
+
+  init_queue(&q1);
+
+  printf("enter input: ");
+  fgets(buf, sizeof(buf), stdin);
+
+  enqueue(&q1, buf);
+
+  printf("%c\n", dequeue(&q1));
+
+  destory(&q1);
+  return 0;
+}

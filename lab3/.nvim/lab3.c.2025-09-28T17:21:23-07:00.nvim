@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main()
+{
+  char* buffer;
+  size_t len = 32;
+  size_t charac;
+
+  printf("Enter Input: ");
+  characters = getline(&buffer, &len, stdin);
+  printf("You typed: '%s'", &buffer);
+
+  return 0;
+}

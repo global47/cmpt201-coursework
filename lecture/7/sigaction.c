@@ -1,0 +1,36 @@
+#define _POSIX_C_SOURCE 200809
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+static char *message = "CTRL-C Pressed\n";
+
+void handler(int signum) { write(STDOUT_FILENO, message, strlen(message)); }
+
+int main() {
+  pid_t pid = fork();
+
+  if (pid == 0) {
+    while (1) {
+    }
+  } else {
+
+    struct sigaction act;
+    act.sa_handler = handler;
+    act.sa_flags = 0;
+    sigemptyset(&act.sa_mask);
+
+    if (sigaction(SIGINT, &act, NULL) == -1) {
+      perror("Sigaction() failed");
+      exit(EXIT_FAILURE);
+    }
+
+    while (1) {
+      sleep(1);
+      printf("sleeping..");
+    }
+  }
+}

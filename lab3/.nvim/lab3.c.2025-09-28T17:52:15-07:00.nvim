@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+void getUI(char *buf[5][32]);
+
+int main() {
+  char buffer[5][32];
+
+  getUI(&buffer);
+
+  return 0;
+}
+
+void getUI(char *buf[5][32]) {
+  int count = 0;
+  while (1) {
+    if (count > 4) {
+      count = 0;
+    }
+    printf("Enter Input: ");
+    scanf("%s", &buf[count]);
+    count++;
+  }
+}

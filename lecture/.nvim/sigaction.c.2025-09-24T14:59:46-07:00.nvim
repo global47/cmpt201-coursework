@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
+#include <stdlib.h>
+
+void handler (int signo, siginfo_t *info, void *context)
+{
+  struct sigaction oldact;
+
+  if (sigaction(SIGSEV, NULL, &oldact) == -1
+    || (oldact.sa_flags & SA_UNSUPPORTED)
+    || !(oldact.sa_flags & SA_EXPOSE_TAGBITS)
+      {
+        _exit(EXIT_FALIURE);
+      }
+
+
+
+int main ()
+{
+  struct sigaction act = {0};
+  
+  while(1)
+  {
+    sleep(5);
+    printf("sleeping..");
+  }
+  return 0;
+}
